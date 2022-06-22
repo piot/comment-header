@@ -17,8 +17,14 @@ license : Path = args.license
 with open(license) as f:
     license_content = f.read()
 
+extensions : tuple[str, str] = ('cs', 'c')
 
-for path in project_dir.rglob('*.cs'):
+all_files : list[Path] = []
+
+for extension in extensions:
+    all_files += project_dir.rglob('*.' + extension)
+
+for path in all_files:
     name = path.relative_to(project_dir)
     print('adding header to ', name)
     full_path = path.absolute()
@@ -29,6 +35,10 @@ for path in project_dir.rglob('*.cs'):
     replaced = re.sub('\/\*(\*(?!\/)|[^*])*\*\/', '', file_content, 1)
 
     replaced = replaced.lstrip()
+
+    if path.suffix == '.cs':
+        replaced = "\n" + replaced
+
     replaced = license_content + replaced
 
     with open(full_path, 'w') as f:
