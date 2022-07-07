@@ -17,7 +17,7 @@ license : Path = args.license
 with open(license) as f:
     license_content = f.read()
 
-extensions : tuple[str, str] = ('cs', 'c')
+extensions : tuple[str, str] = ('cs', 'c', 'h')
 
 all_files : list[Path] = []
 
