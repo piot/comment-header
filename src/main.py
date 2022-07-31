@@ -17,7 +17,7 @@ license : Path = args.license
 with open(license) as f:
     license_content = f.read()
 
-extensions : tuple[str, str] = ('cs', 'c', 'h')
+extensions : tuple[str, str] = ('cs', 'c', 'h', 'go')
 
 all_files : list[Path] = []
 
@@ -36,7 +36,8 @@ for path in all_files:
 
     replaced = replaced.lstrip()
 
-    if path.suffix == '.cs':
+    should_add_linebreak : bool = path.suffix == '.cs' or path.suffix == '.go'
+    if should_add_linebreak:
         replaced = "\n" + replaced
 
     replaced = license_content + replaced
