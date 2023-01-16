@@ -29,10 +29,10 @@ for path in all_files:
     print('adding header to ', name)
     full_path = path.absolute()
 
-    with open(full_path) as f:
+    with open(full_path, encoding='utf8') as f:
         file_content = f.read()
 
-    replaced = re.sub('\/\*(\*(?!\/)|[^*])*\*\/', '', file_content, 1)
+    replaced = re.sub('^\s*\/\*(\*(?!\/)|[^*])*\*\/', '', file_content, 1)
 
     replaced = replaced.lstrip()
 
@@ -42,5 +42,5 @@ for path in all_files:
 
     replaced = license_content + replaced
 
-    with open(full_path, 'w') as f:
+    with open(full_path, 'w', encoding='utf8') as f:
         f.write(replaced)
