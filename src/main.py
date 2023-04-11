@@ -32,7 +32,12 @@ for path in all_files:
     with open(full_path, encoding='utf8') as f:
         file_content = f.read()
 
-    replaced = re.sub('^\s*\/\*(\*(?!\/)|[^*])*\*\/', '', file_content, 1)
+    existing_external_header = re.match('^\s*\/\*\s(\*(?!\/)|[^*])*\*\/', file_content)
+    if existing_external_header != None:
+        print('skipping ', name, ' because it already has an external header')
+        continue
+
+    replaced = re.sub('^\s*\/\*\-(\*(?!\/)|[^*])*\-\*\/', '', file_content, 1)
 
     replaced = replaced.lstrip()
 
