@@ -41,7 +41,7 @@ def read_and_replace_license_text(license_filename : Path, origin_url: str) -> s
 
 
 def find_all_source_files(project_dir: Path) -> list[Path]:
-    extensions : tuple[str, str] = ('cs', 'c', 'h', 'go')
+    extensions : tuple[str, str] = ('cs', 'c', 'h', 'go', 'rs')
 
     all_files : list[Path] = []
 
